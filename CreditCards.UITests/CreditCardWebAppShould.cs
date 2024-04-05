@@ -16,10 +16,26 @@ namespace CreditCards.UITests
         {
             using(IWebDriver driver = new ChromeDriver())
             {
-                driver.Navigate().GoToUrl("http://localhost:44108/");
+                driver.Navigate().GoToUrl(HomeUrl);
 
                 Assert.Equal(HomeTitle, driver.Title);
                 Assert.Equal(HomeUrl, driver.Url);
             }
+        }
+
+        [Fact]
+        [Trait("Category", "Smoke")]
+        public void ReloadHomePage()
+        {
+            using (IWebDriver driver = new ChromeDriver())
+            {
+                driver.Navigate().GoToUrl(HomeUrl);
+
+                driver.Navigate().Refresh();
+
+                Assert.Equal(HomeTitle, driver.Title);
+                Assert.Equal(HomeUrl, driver.Url);
+            }
+        }
     }
 }
