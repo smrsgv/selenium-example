@@ -11,6 +11,7 @@ namespace CreditCards.UITests
 
 
         const string AboutUrl = "http://localhost:44108/Home/About";
+        const string AboutTitle = "About - Credit Cards";
 
         [Fact]
         [Trait("Category", "Smoke")]
@@ -54,6 +55,27 @@ namespace CreditCards.UITests
 
                 Assert.Equal(HomeTitle, driver.Title);
                 Assert.Equal(HomeUrl, driver.Url);
+
+                //TODO: assert that page was reloaded
+            }
+        }
+
+        [Fact]
+        [Trait("Category", "Smoke")]
+        public void ReloadAboutPageOnForward()
+        {
+            using (IWebDriver driver = new ChromeDriver())
+            {
+                driver.Navigate().GoToUrl(HomeUrl);
+
+                driver.Navigate().GoToUrl(AboutUrl);
+
+                driver.Navigate().Back();
+
+                driver.Navigate().Forward();
+
+                Assert.Equal(AboutTitle, driver.Title);
+                Assert.Equal(AboutUrl, driver.Url);
 
                 //TODO: assert that page was reloaded
             }
